@@ -1,0 +1,45 @@
+{% style %}
+.ss-pay {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+.ss-pay h2 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+.ss-pay ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.ss-pay svg {
+  width: 35px;
+  height: auto;
+}
+.ss-pay p {
+  font-size: 11px;
+  color: #666;
+  margin: 8px 0 0;
+}
+{% endstyle %}
+
+<div class="ss-pay">
+  <h2>{{ 'general.payment.methods_title' | t }}</h2>
+  <ul>
+    {% for type in shop.enabled_payment_types %}
+      <li>{{ type | payment_type_svg_tag }}</li>
+    {% endfor %}
+    {% unless shop.enabled_payment_types contains 'klarna' %}
+      <li><!-- Klarna SVG --></li>
+    {% endunless %}
+  </ul>
+  <p>{{ 'general.payment.secure_transactions' | t }}</p>
+</div>
